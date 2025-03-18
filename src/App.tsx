@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import {BrowserRouter as Router, Navigate, Route, Routes} from 'react-router-dom';
 import PrivateRoute from "./core/routes/PrivateRoute.tsx";
 import TasksPage from "./components/pages/TasksPage.tsx";
 import LoginPage from "./components/pages/LoginPage.tsx";
@@ -9,14 +9,7 @@ function App() {
         <Router>
             <Routes>
                 <Route path="/login" element={<LoginPage/>}/>
-                <Route
-                    path="/"
-                    element={
-                        <PrivateRoute>
-                            <App/>
-                        </PrivateRoute>
-                    }
-                />
+                <Route path="/" element={<Navigate to="/tasks" replace />} />
                 <Route
                     path="/tasks"
                     element={

@@ -1,6 +1,6 @@
-// src/components/Navbar.tsx
 import {LogOut, PlusCircle} from "lucide-react";
 import {useNavigate} from "react-router-dom";
+import taskIcon from '../../image/task.png';
 
 interface NavbarProps {
     onNewTaskClick: () => void;
@@ -16,7 +16,10 @@ export default function Navbar({ onNewTaskClick }: NavbarProps) {
         <nav className="bg-white shadow">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
-                    <h1 className="text-3xl font-bold text-gray-900">Task Manager</h1>
+                    <div className="flex items-center space-x-2">
+                        <img src={taskIcon} alt="Task Icon" className="h-9 w-16" />
+                        <h1 className="text-3xl font-bold text-gray-900">Task Manager</h1>
+                    </div>
                     <div className="flex space-x-4">
                         <button
                             onClick={onNewTaskClick}
