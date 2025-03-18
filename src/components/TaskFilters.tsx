@@ -1,4 +1,3 @@
-import React from 'react';
 import { Search } from 'lucide-react';
 import { TaskFilters as TaskFiltersType, TaskStatus } from '../types/task';
 
@@ -16,8 +15,8 @@ export default function TaskFilters({ filters, onFilterChange }: TaskFiltersProp
           <div className="relative">
             <input
               type="text"
-              value={filters.searchQuery || ''}
-              onChange={(e) => onFilterChange({ ...filters, searchQuery: e.target.value })}
+              value={filters.search || ''}
+              onChange={(e) => onFilterChange({ ...filters, search: e.target.value })}
               placeholder="Search tasks..."
               className="block w-full rounded-md border border-gray-300 px-4 py-2 pr-10 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
@@ -37,7 +36,7 @@ export default function TaskFilters({ filters, onFilterChange }: TaskFiltersProp
           >
             <option value="">All Status</option>
             <option value="pending">Pending</option>
-            <option value="in-progress">In Progress</option>
+            <option value="in_progress">In Progress</option>
             <option value="completed">Completed</option>
           </select>
         </div>

@@ -1,17 +1,18 @@
-export type TaskStatus = 'pending' | 'in-progress' | 'completed';
+export type TaskStatus = 'pending' | 'in_progress' | 'completed';
 
 export interface Task {
-  id: string;
+  id?: string;
   title: string;
   description?: string;
-  status: TaskStatus;
+  status?: TaskStatus;
   dueDate?: Date;
-  createdAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface TaskFilters {
   status?: TaskStatus;
-  searchQuery?: string;
+  search?: string;
   startDate?: Date;
   endDate?: Date;
 }
