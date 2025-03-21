@@ -31,6 +31,7 @@ export default function TaskForm({onSubmit, onCancel, initialTask}: Readonly<Tas
     const canChangeStatus = (newStatus: TaskStatus): boolean => {
         if (!initialTask) return true;
         if (initialTask.status === 'completed') return false;
+        if (newStatus === 'pending') return false;
         if (newStatus === 'in_progress' && initialTask.status !== 'pending') return false;
         return !(newStatus === 'completed' && initialTask.status !== 'in_progress');
     };
