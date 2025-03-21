@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import {register} from "../../core/services/auth/Register.ts";
+import Loading from "../Loading.tsx";
 
 const RegisterPage = () => {
     const [username, setUsername] = useState('');
@@ -8,6 +9,7 @@ const RegisterPage = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -16,16 +18,19 @@ const RegisterPage = () => {
             setError('Passwords do not match');
             return;
         }
+        setIsLoading(true);
         setError('');
         try {
             let loginResponse = await register(username, email, password);
             if (loginResponse === null) {
                 setError('Invalid credentials');
+                setIsLoading(false);
                 return;
             } else {
                 console.log('Logged in');
                 localStorage.setItem('token', loginResponse.token);
                 navigate('/tasks');
+                setIsLoading(false);
             }
         } catch (error) {
             console.error(error);
@@ -35,6 +40,7 @@ const RegisterPage = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
+            {isLoading && <Loading />}
             <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-full max-w-sm">
                 <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
                 {error && <div className="mb-4 text-red-600">{error}</div>}
